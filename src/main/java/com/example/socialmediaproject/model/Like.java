@@ -10,19 +10,32 @@ public class Like {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String reaction;
+    private Long userId;
+    private Long postId;
 
-    public Like(){}
+    public Like() {}
 
     public Long getId() {
         return id;
     }
 
-    public String getReaction() {
-        return reaction;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setReaction(String reaction) {
-        this.reaction = reaction;
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
 }

@@ -9,23 +9,20 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
     private String content;
 
     public Post() {}
 
-    public Post(String content) {
-        this.content = content;
-    }
+    public Long getId() { return id; }
 
-    public Long getId() {
-        return id;
-    }
+    public void setId(Long id) { this.id = id; }
 
-    public String getContent() {
-        return content;
-    }
+    public String getTitle() { return title; }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getContent() { return content; }
+
+    public void setContent(String content) { this.content = content; }
 }

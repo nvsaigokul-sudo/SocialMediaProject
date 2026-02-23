@@ -2,6 +2,7 @@ package com.example.socialmediaproject.controller;
 
 import com.example.socialmediaproject.model.User;
 import com.example.socialmediaproject.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,19 +11,16 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserService userService;
-
-    public UserController(UserService userService){
-        this.userService = userService;
-    }
+    @Autowired
+    private UserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user){
-        return userService.createUser(user);
+    public User addUser(@RequestBody User user) {
+        return userService.saveUser(user);
     }
 
     @GetMapping
-    public List<User> getAllUsers(){
+    public List<User> getUsers() {
         return userService.getAllUsers();
     }
 }
