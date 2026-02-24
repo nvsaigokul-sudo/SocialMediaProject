@@ -2,7 +2,6 @@ package com.example.socialmediaproject.controller;
 
 import com.example.socialmediaproject.model.User;
 import com.example.socialmediaproject.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,16 +10,33 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @PostMapping
-    public User addUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
+    // ADD USER
+    @PostMapping
+    public User addUser(@RequestBody User user) {
+        return userService.createUser(user);
+    }
+
+    // GET USERS
     @GetMapping
     public List<User> getUsers() {
         return userService.getAllUsers();
+    }
+
+    // GET USER BY ID
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
+    }
+
+    // DELETE USER
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userService.deleteUser(id);
     }
 }

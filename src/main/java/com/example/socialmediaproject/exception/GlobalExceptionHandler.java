@@ -1,0 +1,33 @@
+package com.example.socialmediaproject.exception;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    // Handle custom exceptions
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFound(
+            ResourceNotFoundException ex) {
+
+        ErrorResponse error =
+                new ErrorResponse(ex.getMessage(),
+                        HttpStatus.NOT_FOUND.value());
+
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    // Handle all other exceptions
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
+
+        ErrorResponse error =
+                new ErrorResponse("Something went wrong",
+                        HttpStatus.INTERNAL_SERVER_ERROR.value());
+
+        return new ResponseEntity<>(error,
+                HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}

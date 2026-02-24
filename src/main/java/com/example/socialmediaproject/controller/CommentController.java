@@ -2,7 +2,6 @@ package com.example.socialmediaproject.controller;
 
 import com.example.socialmediaproject.model.Comment;
 import com.example.socialmediaproject.service.CommentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,16 +10,27 @@ import java.util.List;
 @RequestMapping("/comments")
 public class CommentController {
 
-    @Autowired
-    private CommentService commentService;
+    private final CommentService commentService;
 
-    @PostMapping
-    public Comment addComment(@RequestBody Comment comment) {
-        return commentService.saveComment(comment);
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
     }
 
+    // ADD COMMENT
+    @PostMapping
+    public Comment addComment(@RequestBody Comment comment) {
+        return commentService.addComment(comment); // FIXED
+    }
+
+    // GET ALL COMMENTS
     @GetMapping
     public List<Comment> getComments() {
         return commentService.getAllComments();
+    }
+
+    // DELETE COMMENT
+    @DeleteMapping("/{id}")
+    public void deleteComment(@PathVariable Long id) {
+        commentService.deleteComment(id);
     }
 }
