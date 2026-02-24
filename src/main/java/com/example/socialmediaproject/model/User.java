@@ -3,6 +3,7 @@ package com.example.socialmediaproject.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "users")   // ⭐ FIXED (user → users)
 public class User {
 
     @Id
@@ -12,15 +13,15 @@ public class User {
     private String name;
     private String email;
 
-    // ===== Constructors =====
-    public User() {}
+    public User() {
+    }
 
     public User(String name, String email) {
         this.name = name;
         this.email = email;
     }
 
-    // ===== Getters & Setters =====
+    // ===== GETTERS & SETTERS =====
 
     public Long getId() {
         return id;

@@ -12,13 +12,13 @@ public class Comment {
     private String text;
 
     private Long userId;
+    private Long postId;   // ⭐ REQUIRED
 
-    private Long postId;   // ⭐ MUST EXIST
+    public Comment() {
+    }
 
-    // constructors
-    public Comment() {}
+    // ===== GETTERS & SETTERS =====
 
-    // getters & setters
     public Long getId() {
         return id;
     }
