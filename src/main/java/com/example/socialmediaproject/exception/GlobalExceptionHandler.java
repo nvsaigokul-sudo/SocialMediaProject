@@ -23,8 +23,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
 
+        ex.printStackTrace();
+
         ErrorResponse error =
-                new ErrorResponse("Something went wrong",
+                new ErrorResponse(
+                        ex.getMessage(),   // show real message
                         HttpStatus.INTERNAL_SERVER_ERROR.value());
 
         return new ResponseEntity<>(error,
