@@ -16,21 +16,19 @@ public class LikeController {
         this.likeService = likeService;
     }
 
-    // ADD LIKE
     @PostMapping
-    public Like addLike(@RequestBody Like like) {
-        return likeService.likePost(like); // FIXED
+    public Like createLike(@RequestBody Like like) {
+        return likeService.createLike(like);
     }
 
-    // GET ALL LIKES
     @GetMapping
-    public List<Like> getLikes() {
+    public List<Like> getAllLikes() {
         return likeService.getAllLikes();
     }
 
-    // DELETE LIKE
     @DeleteMapping("/{id}")
-    public void deleteLike(@PathVariable Long id) {
-        likeService.dislikePost(id);
+    public String deleteLike(@PathVariable Long id) {
+        likeService.deleteLike(id);
+        return "Like deleted";
     }
 }

@@ -16,21 +16,19 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    // ADD COMMENT
     @PostMapping
-    public Comment addComment(@RequestBody Comment comment) {
-        return commentService.addComment(comment); // FIXED
+    public Comment createComment(@RequestBody Comment comment) {
+        return commentService.createComment(comment);
     }
 
-    // GET ALL COMMENTS
     @GetMapping
-    public List<Comment> getComments() {
+    public List<Comment> getAllComments() {
         return commentService.getAllComments();
     }
 
-    // DELETE COMMENT
     @DeleteMapping("/{id}")
-    public void deleteComment(@PathVariable Long id) {
+    public String deleteComment(@PathVariable Long id) {
         commentService.deleteComment(id);
+        return "Comment deleted";
     }
 }

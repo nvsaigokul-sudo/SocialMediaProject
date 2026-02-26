@@ -16,27 +16,19 @@ public class PostController {
         this.postService = postService;
     }
 
-    // ADD POST
     @PostMapping
-    public Post addPost(@RequestBody Post post) {
-        return postService.createPost(post); // FIXED
+    public Post createPost(@RequestBody Post post) {
+        return postService.createPost(post);
     }
 
-    // GET ALL POSTS
     @GetMapping
-    public List<Post> getPosts() {
+    public List<Post> getAllPosts() {
         return postService.getAllPosts();
     }
 
-    // GET POST BY ID
-    @GetMapping("/{id}")
-    public Post getPostById(@PathVariable Long id) {
-        return postService.getPostById(id);
-    }
-
-    // DELETE POST
     @DeleteMapping("/{id}")
-    public void deletePost(@PathVariable Long id) {
-        postService.deletePostById(id);
+    public String deletePost(@PathVariable Long id) {
+        postService.deletePost(id);
+        return "Post deleted";
     }
 }

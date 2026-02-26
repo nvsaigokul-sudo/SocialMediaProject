@@ -1,6 +1,5 @@
 package com.example.socialmediaproject.service;
 
-import com.example.socialmediaproject.exception.ResourceNotFoundException;
 import com.example.socialmediaproject.model.Like;
 import com.example.socialmediaproject.repository.LikeRepo;
 import org.springframework.stereotype.Service;
@@ -10,30 +9,21 @@ import java.util.List;
 @Service
 public class LikeService {
 
-    private final LikeRepo likeRepo;
+    private final LikeRepo repo;
 
-    public LikeService(LikeRepo likeRepo) {
-        this.likeRepo = likeRepo;
+    public LikeService(LikeRepo repo) {
+        this.repo = repo;
     }
 
-    // ADD LIKE
-    public Like likePost(Like like) {
-        return likeRepo.save(like);
+    public Like createLike(Like l) {
+        return repo.save(l);
     }
 
-    // GET ALL LIKES
     public List<Like> getAllLikes() {
-        return likeRepo.findAll();
+        return repo.findAll();
     }
 
-    // DELETE LIKE
-    public void dislikePost(Long id) {
-
-        Like like = likeRepo.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "Like not found with id: " + id));
-
-        likeRepo.delete(like);
+    public void deleteLike(Long id) {
+        repo.deleteById(id);
     }
 }

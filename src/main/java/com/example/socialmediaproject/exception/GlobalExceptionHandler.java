@@ -1,13 +1,14 @@
 package com.example.socialmediaproject.exception;
 
-import org.springframework.http.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleNotFound(
+    public ResponseEntity<ErrorResponse> handleResourceNotFound(
             ResourceNotFoundException ex) {
 
         ErrorResponse error =
@@ -17,15 +18,13 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGeneric(Exception ex) {
+    public ResponseEntity<ErrorResponse> handleAllExceptions(
+            Exception ex) {
 
         ErrorResponse error =
-                new ErrorResponse(
-                        "Something went wrong",
-                        500);
+                new ErrorResponse("Something went wrong", 500);
 
-        return new ResponseEntity<>(
-                error,
+        return new ResponseEntity<>(error,
                 HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

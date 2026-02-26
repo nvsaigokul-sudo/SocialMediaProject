@@ -3,7 +3,7 @@ package com.example.socialmediaproject.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "likes")   // ⭐ IMPORTANT FIX
+@Table(name = "likes")
 public class Like {
 
     @Id
@@ -13,29 +13,11 @@ public class Like {
     private Long userId;
     private Long postId;
 
-    public Like() {}
+    public Long getId() { return id; }
+    public Long getUserId() { return userId; }
+    public Long getPostId() { return postId; }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getPostId() {
-        return postId;
-    }
-
-    public void setPostId(Long postId) {
-        this.postId = postId;
-    }
+    public void setId(Long id) { this.id = id; }
+    public void setUserId(Long userId) { this.userId = userId; }
+    public void setPostId(Long postId) { this.postId = postId; }
 }

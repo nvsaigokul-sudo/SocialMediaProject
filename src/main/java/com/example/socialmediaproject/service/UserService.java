@@ -1,8 +1,8 @@
 package com.example.socialmediaproject.service;
 
-import com.example.socialmediaproject.exception.ResourceNotFoundException;
 import com.example.socialmediaproject.model.User;
 import com.example.socialmediaproject.repository.UserRepo;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,32 +11,26 @@ import java.util.List;
 public class UserService {
 
     private final UserRepo userRepo;
+    private final PasswordEncoder encoder;
 
-    public UserService(UserRepo userRepo) {
+    public UserService(UserRepo userRepo,
+                       PasswordEncoder encoder) {
         this.userRepo = userRepo;
+        this.encoder = encoder;
     }
 
-    // CREATE USER
     public User createUser(User user) {
+        user.setPassword(
+                encoder.encode(user.getPassword())
+        );
         return userRepo.save(user);
     }
 
-    // GET ALL USERS
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
 
-    // GET USER BY ID
-    public User getUserById(Long id) {
-        return userRepo.findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(
-                                "User not found with id: " + id));
-    }
-
-    // DELETE USER
     public void deleteUser(Long id) {
-        User user = getUserById(id);
-        userRepo.delete(user);
+        userRepo.deleteById(id);
     }
 }
